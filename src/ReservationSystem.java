@@ -9,19 +9,18 @@ public class ReservationSystem {
 
 
         // checks the file name and throws exception if it does not exist
-        String fName = "//file path here";
-        File file = new File(fName);
-        if(file.exists()){
-            System.out.println("File exists!!");
-        }
-        else{
-            System.out.println("File does not exit!");
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        String fName = args[0];
+        String fName1;
+       try {
+           File file = new File(fName);
+           if (file.exists() == false) {
+               file.createNewFile();
+           }
+           fName1 = mainMenu;
+       }catch (Exception e){
+           e.printStackTrace();;
+       }
+
 
 
 

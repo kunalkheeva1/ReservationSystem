@@ -1,20 +1,13 @@
 public class ReservationRequest {
-     enum ServiceClass{
-        FIRST,
-        ECONOMY;
-    };
-     enum SeatPreference{
-         WINDOW,
-         AISLE,
-         CENTER;
-     }
-    ServiceClass userServiceClass;
-     SeatPreference userSeatPreference;
+     String[] serviceClass = {"First", "Economy"}
+
+     String[] seatPreference = {"Window","Center","Aisle"} ;
+
      Passenger passenger;
 
-     public ReservationRequest(Passenger passenger, ServiceClass userServiceClass, SeatPreference userSeatPreference) {
-        this.userSeatPreference = userSeatPreference;
-        this.userServiceClass = userServiceClass;
+     public ReservationRequest(Passenger passenger, String[] ServiceClass, String[] userSeatPreference) {
+        this.seatPreference = seatPreference;
+        this.serviceClass = serviceClass;
         this.passenger = passenger;
     }
     public Passenger getPassenger() {
@@ -26,23 +19,21 @@ public class ReservationRequest {
     }
 
 
-
-    public ServiceClass getUserServiceClass() {
-        return userServiceClass;
+    public String[] getServiceClass() {
+        return serviceClass;
     }
 
-    public void setUserServiceClass(ServiceClass userServiceClass) {
-        this.userServiceClass = userServiceClass;
-    }
-    public SeatPreference getUserSeatPreference() {
-        return userSeatPreference;
+    public void setServiceClass(String[] serviceClass) {
+        this.serviceClass = serviceClass;
     }
 
-    public void setUserSeatPreference(SeatPreference userSeatPreference) {
-        this.userSeatPreference = userSeatPreference;
+    public String[] getSeatPreference() {
+        return seatPreference;
     }
 
-
+    public void setSeatPreference(String[] seatPreference) {
+        this.seatPreference = seatPreference;
+    }
 }
 //create a new class Booking Service, booking methods, book single , book group, cancel single cancel group,
 
