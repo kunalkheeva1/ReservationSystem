@@ -1,39 +1,32 @@
 public class ReservationRequest {
-     String[] serviceClass = {"First", "Economy"}
-
-     String[] seatPreference = {"Window","Center","Aisle"} ;
-
+     ServiceClass userServiceClass;
+     SeatPreference userSeatPreference;
      Passenger passenger;
 
-     public ReservationRequest(Passenger passenger, String[] ServiceClass, String[] userSeatPreference) {
-        this.seatPreference = seatPreference;
-        this.serviceClass = serviceClass;
-        this.passenger = passenger;
-    }
-    public Passenger getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
+     public ReservationRequest(Passenger passenger, ServiceClass userServiceClass, SeatPreference userSeatPreference) {
+        this.userSeatPreference = userSeatPreference;
+        this.userServiceClass = userServiceClass;
         this.passenger = passenger;
     }
 
 
-    public String[] getServiceClass() {
-        return serviceClass;
+    public SeatPreference getUserSeatPreference() {
+        return userSeatPreference;
     }
 
-    public void setServiceClass(String[] serviceClass) {
-        this.serviceClass = serviceClass;
+    public void setUserSeatPreference(SeatPreference userSeatPreference) {
+        this.userSeatPreference = userSeatPreference;
     }
 
-    public String[] getSeatPreference() {
-        return seatPreference;
+    public ServiceClass getUserServiceClass() {
+        return userServiceClass;
     }
 
-    public void setSeatPreference(String[] seatPreference) {
-        this.seatPreference = seatPreference;
+    public void setUserServiceClass(ServiceClass userServiceClass) {
+        this.userServiceClass = userServiceClass;
     }
+
+
 }
 //create a new class Booking Service, booking methods, book single , book group, cancel single cancel group,
 
