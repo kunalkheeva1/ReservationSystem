@@ -1,10 +1,7 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
-public class Booking {
+public class BookingService {
 
      FlightDetails flightDetails;
      Map<String, Seat> passengerMap;
@@ -13,7 +10,7 @@ public class Booking {
     /**
      * Initialise flight
      */
-    public Booking (){
+    public BookingService(){
          flightDetails = new FlightDetails();
          passengerMap = new HashMap<>();
      }
