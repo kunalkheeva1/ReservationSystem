@@ -1,54 +1,48 @@
 public class FlightDetails {
-    /**
-     *   X X--> 0th W
-     *   X X --> Aisle
-     *   X X --> A
-     *   X X --> W
-     */
-    Seat [][] firstClass;//= new Seat[4][2];
+   Seat[][] firstClass;
+   int firstRows;
 
-    /**
-     *   X X--> 0th W
-     *   X X --> C
-     *   X X --> Aisle
-     *
-     *   X X --> A
-     *   X X --> C
-     *   X X --> W
-     */
-    Seat [][] secondClass;// = new Seat [6][20];
+   Seat[][] economyClass;
+   int economyRows;
 
-    public FlightDetails() {
-        firstClass = new Seat[4][2];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 2; j++) {
-                char location;
-                if (i == 0 || i == 3) {
-                    location = 'W';
-                } else {
-                    location = 'A';
-                }
-                Seat seat = new Seat(j + 1, location, SeatStatus.FREE);
-                firstClass[i][j] = seat;
-            }
-        }
-        secondClass = new Seat [6][20];
-        // initialise second class seats
-    }
+   public FlightDetails(int firstRows, int economyRows){
+      this.firstClass = new Seat[4][firstRows];
+      this.firstRows = firstRows;
+      this.economyClass = new Seat[6][economyRows];
+      this.economyRows = economyRows;
+   }
 
-    public Seat[][] getFirstClass() {
-        return firstClass;
-    }
+   public Seat[][] getFirstClass() {
+      return firstClass;
+   }
 
-    public void setFirstClass(Seat[][] firstClass) {
-        this.firstClass = firstClass;
-    }
+   public void setFirstClass(Seat[][] firstClass) {
+      this.firstClass = firstClass;
+   }
 
-    public Seat[][] getSecondClass() {
-        return secondClass;
-    }
+   public int getFirstRows() {
+      return firstRows;
+   }
 
-    public void setSecondClass(Seat[][] secondClass) {
-        this.secondClass = secondClass;
-    }
+   public void setFirstRows(int firstRows) {
+      this.firstRows = firstRows;
+   }
+
+   public Seat[][] getEconomyClass() {
+      return economyClass;
+   }
+
+   public void setEconomyClass(Seat[][] economyClass) {
+      this.economyClass = economyClass;
+   }
+
+   public int getEconomyRows() {
+      return economyRows;
+   }
+
+   public void setEconomyRows(int economyRows) {
+      this.economyRows = economyRows;
+   }
+
+
 }
