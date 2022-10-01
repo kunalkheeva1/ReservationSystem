@@ -51,4 +51,12 @@ public class Seat {
     public void setServiceClass(ServiceClass serviceClass) {
         this.serviceClass = serviceClass;
     }
+
+    @Override
+    public String toString() {
+        char seatIndex =(char)('A'+ this.index);
+
+        return "Seat Number: " + (this.row +1) + " "+ (char)seatIndex;
+
+    }
 }
