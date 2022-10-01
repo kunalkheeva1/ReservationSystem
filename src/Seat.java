@@ -1,11 +1,11 @@
 public class Seat {
     int seatRow;
-    char seaLocation;
+    char seatLocation;
     SeatStatus status;
 
     public Seat(int seatRow, char seaLocation, SeatStatus status) {
         this.seatRow = seatRow;
-        this.seaLocation = seaLocation;
+        this.seatLocation = seaLocation;
         this.status = status;
     }
 
@@ -17,12 +17,12 @@ public class Seat {
         this.seatRow = seatRow;
     }
 
-    public char getSeaLocation() {
-        return seaLocation;
+    public char getSeatLocation() {
+        return seatLocation;
     }
 
-    public void setSeaLocation(char seaLocation) {
-        this.seaLocation = seaLocation;
+    public void setSeatLocation(char seaLocation) {
+        this.seatLocation = seaLocation;
     }
 
     public SeatStatus getStatus() {

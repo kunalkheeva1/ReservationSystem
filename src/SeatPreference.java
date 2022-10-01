@@ -1,5 +1,6 @@
 public enum SeatPreference {
-    WINDOW,
-    AISLE,
-    CENTER;
+    W,
+    A,
+    C,
+    N
 }

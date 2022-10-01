@@ -1,4 +1,4 @@
 public enum ServiceClass {
-    FIRST,
-    ECONOMY;
+    F,
+    E
 }
