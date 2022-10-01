@@ -24,5 +24,43 @@ public class ReservationRequest {
         }
     }
 
+    public BookingType getBookingType() {
+        return bookingType;
+    }
 
+    public void setBookingType(BookingType bookingType) {
+        this.bookingType = bookingType;
+    }
+
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(ArrayList<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+    public SeatPreference getSeatPreference() {
+        return seatPreference;
+    }
+
+    public void setSeatPreference(SeatPreference seatPreference) {
+        this.seatPreference = seatPreference;
+    }
+
+    public ServiceClass getServiceClass() {
+        return serviceClass;
+    }
+
+    public void setServiceClass(ServiceClass serviceClass) {
+        this.serviceClass = serviceClass;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
 }
