@@ -135,7 +135,7 @@ public class BookingService {
         // check if seat are available for booking
         if (availableEcoSeats < reservationRequest.getPassengers().size()) {
             System.out.println("Seat are not available for group : " + reservationRequest.getGroupId());
-            System.out.println("[Economy class] Available seats :" + availableEcoSeats + " and requested seats : " + reservationRequest.getPassenger().size());
+            System.out.println("[Economy class] Available seats :" + availableEcoSeats + " and requested seats : " + reservationRequest.getPassengers().size());
             return false;
         }
         // now block seats
@@ -180,7 +180,7 @@ public class BookingService {
         }
         if (availableSeats < reservationRequest.getPassengers().size()) {
             System.out.println("Seat are not available for group : " + reservationRequest.getGroupId());
-            System.out.println("[First class] Available seats :" + availableSeats + " and requested seats : " + reservationRequest.getPassenger().size());
+            System.out.println("[First class] Available seats :" + availableSeats + " and requested seats : " + reservationRequest.getPassengers().size());
             return false;
         }
 
@@ -321,8 +321,8 @@ public class BookingService {
     }
 
 
-    public void seatManifest(SeatClass seatClass) {
-        if (seatClass.equals(SeatClass.F)) {
+    public void seatManifest(ServiceClass seatClass) {
+        if (seatClass.equals(ServiceClass.F)) {
             // availability for first class
             System.out.println("=====================================");
             System.out.println("First Class Availability :");
@@ -493,6 +493,36 @@ public class BookingService {
         return -1;
     }
 
+
+
+    private char getSeatIndex(Seat seat) {
+        if (seat.getServiceClass().equals(ServiceClass.E)) {
+            if (seat.getIndex() == 0) {
+                return 'A';
+            } else if (seat.getIndex() == 1) {
+                return 'B';
+            } else if (seat.getIndex() == 2) {
+                return 'C';
+            } else if (seat.getIndex() == 3) {
+                return 'D';
+            } else if (seat.getIndex() == 4) {
+                return 'E';
+            } else if (seat.getIndex() == 5) {
+                return 'F';
+            }
+        } else if (seat.getServiceClass().equals(ServiceClass.F)) {
+            if (seat.getIndex() == 0) {
+                return 'A';
+            } else if (seat.getIndex() == 1) {
+                return 'B';
+            } else if (seat.getIndex() == 2) {
+                return 'C';
+            } else if (seat.getIndex() == 3) {
+                return 'D';
+            }
+        }
+        return 'N';
+    }
 
 
 
