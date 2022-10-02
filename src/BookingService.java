@@ -228,7 +228,7 @@ public class BookingService {
         if (cancellationRequest.getCancellationType().equals(CancellationType.SINGLE)) {
             if (passengerMap.containsKey(cancellationRequest.getPassengerName().getFirstName() + cancellationRequest.getPassengerName().getLastName())) {
                 Seat seat = passengerMap.get(cancellationRequest.getPassengerName().getFirstName() + cancellationRequest.getPassengerName().getLastName());
-                if (seat.getSeatClass() == SeatClass.F) {
+                if (seat.getServiceClass() == ServiceClass.F) {
                     flightDetails.getFirstClass()[seat.getIndex()][seat.getRow()] = null;
                 } else {
                     flightDetails.getEconomyClass()[seat.getIndex()][seat.getRow()] = null;
@@ -244,6 +244,26 @@ public class BookingService {
         }
         return true;
     }
-
+    private boolean cancelGroup(CancellationRequest cancellationRequest) {
+        if (cancellationRequest.getCancellationType().equals(CancellationType.GROUP)) {
+            if (groupMap.containsKey(cancellationRequest.getGroupId())) {
+                ArrayList<Passenger> passengerArrayList = groupMap.get(cancellationRequest.getGroupId());
+                for (Passenger passenger : passengerArrayList) {
+                    Seat seat = passengerMap.get(passenger.getFirstName() + passenger.getLastName());
+                    if (seat.getServiceClass() == ServiceClass.F) {
+                        flightDetails.getFirstClass()[seat.getIndex()][seat.getRow()] = null;
+                    } else {
+                        flightDetails.getEconomyClass()[seat.getIndex()][seat.getRow()] = null;
+                    }
+                    passengerMap.remove(passenger.getFirstName() + passenger.getLastName());
+                }
+                groupMap.remove(cancellationRequest.getGroupId());
+            } else {
+                System.out.println("Passenger booking doesn't exist");
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
