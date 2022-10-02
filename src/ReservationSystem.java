@@ -94,6 +94,4 @@ public class ReservationSystem {
         System.out.println("Booking are written to file: " + args[0]);
         System.out.println("Reservation System Ended.........");
     }
-
-
 }
