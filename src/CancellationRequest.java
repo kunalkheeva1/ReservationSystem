@@ -3,7 +3,7 @@ public class CancellationRequest {
     Passenger passengerName;
     String groupId;
 
-    public CancellationRequest(CancellationType cancellationType, Passenger passengerName, String groupId){
+    public CancellationRequest(CancellationType cancellationType, String groupId, Passenger passengerName){
         this.cancellationType = cancellationType;
         this.passengerName = passengerName;
         this.groupId = groupId;
