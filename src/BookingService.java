@@ -224,4 +224,26 @@ public class BookingService {
         return result;
     }
 
+    private boolean cancelSingle(CancellationRequest cancellationRequest) {
+        if (cancellationRequest.getCancellationType().equals(CancellationType.SINGLE)) {
+            if (passengerMap.containsKey(cancellationRequest.getPassengerName().getFirstName() + cancellationRequest.getPassengerName().getLastName())) {
+                Seat seat = passengerMap.get(cancellationRequest.getPassengerName().getFirstName() + cancellationRequest.getPassengerName().getLastName());
+                if (seat.getSeatClass() == SeatClass.F) {
+                    flightDetails.getFirstClass()[seat.getIndex()][seat.getRow()] = null;
+                } else {
+                    flightDetails.getEconomyClass()[seat.getIndex()][seat.getRow()] = null;
+                }
+                passengerMap.remove(cancellationRequest.getPassengerName().getFirstName() + cancellationRequest.getPassengerName().getLastName());
+            } else {
+                System.out.println("Passenger booking doesn't exist");
+                return false;
+            }
+        } else  {
+            System.out.println("Cancellation type is not single in this case");
+            return false;
+        }
+        return true;
+    }
+
+
 }
