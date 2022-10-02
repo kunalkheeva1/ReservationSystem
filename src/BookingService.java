@@ -121,4 +121,95 @@ public class BookingService {
     }
 
 
+    public boolean bookGroupEconomyClass(ReservationRequest reservationRequest) {
+        int availableEcoSeats = 0;
+
+        // calculate available seats in first class
+        for(int i = 0; i < flightDetails.getEconomyRows(); i ++) {
+            for (int j = 0; j < 6; j++) {
+                if (flightDetails.getEconomyClass()[j][i] == null) {
+                    availableEcoSeats ++;
+                }
+            }
+        }
+        // check if seat are available for booking
+        if (availableEcoSeats < reservationRequest.getPassengers().size()) {
+            System.out.println("Seat are not available for group : " + reservationRequest.getGroupId());
+            System.out.println("[Economy class] Available seats :" + availableEcoSeats + " and requested seats : " + reservationRequest.getPassenger().size());
+            return false;
+        }
+        // now block seats
+        // allocate seat
+        int count = 0;
+        boolean flag = false;
+        for( int i = 0; i < flightDetails.getEconomyRows(); i ++) {
+            for (int j = 0; j < 6; j++) {
+                if (flightDetails.getEconomyClass()[j][i] == null) {
+                    Seat seat = new Seat(i, j, SeatStatus.ALLOCATED, ServiceClass.E);
+                    Passenger passenger = reservationRequest.getPassengers().get(count);
+                    seat.setPassenger(passenger);
+                    passengerMap.put(passenger.getFirstName()+passenger.getLastName(), seat);
+                    flightDetails.getEconomyClass()[j][i] = seat;
+                    count++;
+                }
+                if (count == reservationRequest.getPassengers().size()) {
+                    groupMap.put(reservationRequest.getGroupId(), reservationRequest.getPassengers());
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) {
+                break;
+            }
+        }
+        return true;
+    }
+
+
+
+    public boolean bookGroupFirstClass(ReservationRequest reservationRequest) {
+        int availableSeats = 0;
+
+        // calculate available seats in first class
+        for(int i = 0; i < 4; i ++) {
+            for (int j = 0; j < flightDetails.getFirstRows(); j++) {
+                if (flightDetails.getFirstClass()[i][j] == null) {
+                    availableSeats ++;
+                }
+            }
+        }
+        if (availableSeats < reservationRequest.getPassengers().size()) {
+            System.out.println("Seat are not available for group : " + reservationRequest.getGroupId());
+            System.out.println("[First class] Available seats :" + availableSeats + " and requested seats : " + reservationRequest.getPassenger().size());
+            return false;
+        }
+
+        int count = 0;
+        boolean flag = false;
+        // allocate seat
+        for( int i = 0; i < flightDetails.getFirstRows(); i ++) {
+            for (int j = 0; j < 4; j++) {
+                if (flightDetails.getFirstClass()[j][i] == null) {
+                    Seat seat = new Seat(i, j, SeatStatus.ALLOCATED, ServiceClass.F);
+                    Passenger passenger = reservationRequest.getPassengers().get(count);
+                    seat.setPassenger(passenger);
+                    passengerMap.put(passenger.getFirstName()+passenger.getLastName(), seat);
+                    flightDetails.getFirstClass()[j][i] = seat;
+                    count++;
+                }
+
+                if (count == reservationRequest.getPassengers().size()) {
+                    groupMap.put(reservationRequest.getGroupId(), reservationRequest.getPassengers());
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) {
+                break;
+            }
+        }
+        return true;
+    }
+
+
 }
