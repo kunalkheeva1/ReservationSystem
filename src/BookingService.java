@@ -365,4 +365,52 @@ public class BookingService {
     }
 
 
+    public void writeToFile(String fileName) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(fileName);
+            // writing group data
+            for (Map.Entry<String, ArrayList<Passenger>> entry : groupMap.entrySet()) {
+                StringBuffer groupHeaderLine = new StringBuffer();
+                groupHeaderLine.append("G, " + entry.getKey() + ", ");
+                groupHeaderLine.append(entry.getValue().size() +" \n");
+                fileWriter.write(groupHeaderLine.toString());
+
+                for (Passenger passenger : entry.getValue()) {
+                    StringBuffer singleLine = new StringBuffer();
+                    singleLine.append(passenger.getFirstName() + " " + passenger.getLastName() + ", ");
+                    Seat seat = passengerMap.get(passenger.getFirstName() + passenger.getLastName());
+                    singleLine.append(seat.getServiceClass().toString() + ", ");
+                    singleLine.append(seat.getRow() + 1 +", ");
+                    singleLine.append(getSeatIndex(seat) + " \n");
+                    // removed entry from passenger map
+                    passengerMap.remove(passenger.getFirstName() + passenger.getLastName());
+
+                    fileWriter.write(singleLine.toString());
+                }
+            }
+            // write single booking
+            for (Map.Entry<String, Seat> entry : passengerMap.entrySet()) {
+                StringBuffer singleLine = new StringBuffer("S, ");
+                Seat seat = entry.getValue();
+                singleLine.append(seat.getPassenger().getFirstName()+ " " + seat.getPassenger().getLastName() + ", ");
+                singleLine.append(seat.getServiceClass().toString() + ", ");
+                singleLine.append(seat.getRow() + 1 + ", ");
+                singleLine.append(getSeatIndex(seat) + "\n");
+                fileWriter.write(singleLine.toString());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (fileWriter != null) {
+                try {
+                    fileWriter.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+
 }
