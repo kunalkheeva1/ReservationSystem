@@ -210,6 +210,18 @@ public class BookingService {
         }
         return true;
     }
-
+    public boolean cancel(CancellationRequest cancellationRequest) {
+        boolean result = false;
+        if (cancellationRequest.getCancellationType().equals(CancellationType.SINGLE)) {
+            result = cancelSingle(cancellationRequest);
+            System.out.println("Single cancellation is done");
+        } else if (cancellationRequest.getCancellationType().equals(CancellationType.GROUP)) {
+            result= cancelGroup(cancellationRequest);
+            System.out.println("Group cancellation is done");
+        } else {
+            System.out.println("Cancellation type is not correct ");
+        }
+        return result;
+    }
 
 }
