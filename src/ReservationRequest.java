@@ -11,6 +11,19 @@ public class ReservationRequest {
     //groupId
     String groupId;
 
+    /**
+     * Enables the reservation request
+     * @param bookingType
+     * - asks for booking type
+     * @param passengers
+     * - names of the passengers
+     * @param seatPreference
+     * - seat preferece, Window, Aisle or Center
+     * @param serviceClass
+     * - Service class Economy or First
+     * @param groupId
+     * - group name
+     */
     public ReservationRequest(BookingType bookingType, ArrayList<Passenger> passengers, SeatPreference seatPreference, ServiceClass serviceClass, String groupId){
         this.bookingType = bookingType;
         this.passengers = passengers;

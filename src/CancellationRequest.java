@@ -3,6 +3,15 @@ public class CancellationRequest {
     Passenger passengerName;
     String groupId;
 
+    /**
+     * Cancellation Request
+     * @param cancellationType
+     * - type of the cancellation whether Individual or group
+     * @param groupId
+     * - name of the group
+     * @param passengerName
+     * - name of the passenger
+     */
     public CancellationRequest(CancellationType cancellationType, String groupId, Passenger passengerName){
         this.cancellationType = cancellationType;
         this.passengerName = passengerName;

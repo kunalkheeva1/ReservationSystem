@@ -5,6 +5,13 @@ public class FlightDetails {
    Seat[][] economyClass;
    int economyRows;
 
+   /**
+    * Gather the flight details with respect to rows and columns of both classes
+    * @param firstRows
+    * - first class rows.
+    * @param economyRows
+    * - economy class rows.
+    */
    public FlightDetails(int firstRows, int economyRows){
       this.firstClass = new Seat[4][firstRows];
       this.firstRows = firstRows;

@@ -9,12 +9,22 @@ public class BookingService {
     Map<String, Seat> passengerMap;
     Map<String, ArrayList<Passenger>> groupMap;
 
+    /**
+     * Booking service constructor
+     */
     public BookingService(){
         flightDetails = new FlightDetails(2,20);
         passengerMap = new HashMap<>();
         groupMap = new HashMap<>();
     }
 
+    /**
+     * Book method to receive the reservation request
+     * @param reservationRequest
+     * - reservation request to be used for the further detailing
+     * @return
+     * true or false with respect to the reservation request availability
+     */
     public boolean book(ReservationRequest reservationRequest){
         boolean result = false;
         //single
@@ -35,6 +45,13 @@ public class BookingService {
         }return result;
     }
 
+    /**
+     * Booking for single passenger in first class
+     * @param reservationRequest
+     * - Type of the reservation reequest
+     * @return
+     * True or false with respect to the reservation request
+     */
     private boolean bookSingleFirstClass(ReservationRequest reservationRequest){
         int seatIndex =-1;
         int i=0;
@@ -75,7 +92,13 @@ public class BookingService {
     }
 
 
-
+    /**
+     * Booking for ht single passenger in economy class
+     * @param reservationRequest
+     * -contains the reservation details with respect to passenger data as well
+     * @return
+     * True or false with respect to the reservation request
+     */
     private boolean bookSingleEconomyClass(ReservationRequest reservationRequest) {
         int eSeatIndex = -1;
         int i = 0;
@@ -120,7 +143,13 @@ public class BookingService {
         return true;
     }
 
-
+    /**
+     * Booking for the group in the economy class
+     * @param reservationRequest
+     * - Type of the reservation request.
+     * @return
+     * True or false with respect to the reservation request
+     */
     public boolean bookGroupEconomyClass(ReservationRequest reservationRequest) {
         int availableEcoSeats = 0;
 
@@ -166,7 +195,13 @@ public class BookingService {
     }
 
 
-
+    /**
+     * booking for the group in first class
+     * @param reservationRequest
+     * - Type of the reservation request.
+     * @return
+     * True or false with respect to the reservation request
+     */
     public boolean bookGroupFirstClass(ReservationRequest reservationRequest) {
         int availableSeats = 0;
 
@@ -210,6 +245,14 @@ public class BookingService {
         }
         return true;
     }
+
+    /**
+     * cancel the request
+     * @param cancellationRequest
+     * - cancellation request as a parameter
+     * @return
+     * True of false with respect to the type of the cancellation request
+     */
     public boolean cancel(CancellationRequest cancellationRequest) {
         boolean result = false;
         if (cancellationRequest.getCancellationType().equals(CancellationType.SINGLE)) {
@@ -224,6 +267,14 @@ public class BookingService {
         return result;
     }
 
+
+    /**
+     * Cancellation of the single passenger
+     * @param cancellationRequest
+     * - managing the cancellation request of the single passenger
+     * @return
+     * True of false with respect to the type of the cancellation request
+     */
     private boolean cancelSingle(CancellationRequest cancellationRequest) {
         if (cancellationRequest.getCancellationType().equals(CancellationType.SINGLE)) {
             if (passengerMap.containsKey(cancellationRequest.getPassengerName().getFirstName() + cancellationRequest.getPassengerName().getLastName())) {
@@ -244,6 +295,15 @@ public class BookingService {
         }
         return true;
     }
+
+
+    /**
+     * Cancellation of whole group from the system.
+     * @param cancellationRequest
+     * anaging the cancellation request of the group
+     * @return
+     * True of false with respect to the type of the cancellation request
+     */
     private boolean cancelGroup(CancellationRequest cancellationRequest) {
         if (cancellationRequest.getCancellationType().equals(CancellationType.GROUP)) {
             if (groupMap.containsKey(cancellationRequest.getGroupId())) {
@@ -266,7 +326,11 @@ public class BookingService {
         return true;
     }
 
-
+    /**
+     * checking the seat availability at certain point
+     * @param seatClass
+     * - taking the paramter of seat class, which is service of first or economy.
+     */
     public void checkAvailability(ServiceClass seatClass) {
         if (seatClass.equals(ServiceClass.F)) {
             // availability for first class
@@ -321,6 +385,12 @@ public class BookingService {
     }
 
 
+    /**
+     * Records of seat Manifest
+     * @param seatClass
+     * - service of the class as the parameter.
+     */
+
     public void seatManifest(ServiceClass seatClass) {
         if (seatClass.equals(ServiceClass.F)) {
             // availability for first class
@@ -352,6 +422,13 @@ public class BookingService {
         }
     }
 
+    /**
+     * Printing the seat arrangements
+     * @param row
+     * -row numbers
+     * @param seats
+     * list of the seat.
+     */
     private void printSeat(int row, ArrayList<Character> seats) {
         System.out.printf(String.valueOf(row) + ": ");
         for (int i = 0; i < seats.size(); i++) {
@@ -364,7 +441,11 @@ public class BookingService {
         System.out.println();
     }
 
-
+    /**
+     * writing to the file for the detailing
+     * @param fileName
+     * - name of the existing or created file
+     */
     public void writeToFile(String fileName) {
         FileWriter fileWriter = null;
         try {
@@ -412,7 +493,11 @@ public class BookingService {
         }
     }
 
-
+    /**
+     * Reading from file
+     * @param fileName
+     * - file name as the parameter.
+     */
     public void readFromFile(String fileName) {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
@@ -432,6 +517,11 @@ public class BookingService {
         }
     }
 
+    /**
+     * Book for the single from the files
+     * @param line
+     * - string as the parameter.
+     */
     private void bookSingleFromFile(String line) {
         String [] singleBookingLine = line.split(",");
         String []pasName = singleBookingLine[1].trim().split(" ");
@@ -450,7 +540,17 @@ public class BookingService {
         }
     }
 
-
+    /**
+     * Book group from file
+     * @param groupName
+     * - name of the group
+     * @param number
+     * - number as the paramter
+     * @param bufferedReader
+     * - reader for the reading files
+     * @throws IOException
+     * if does not go through then throws exception
+     */
     private void bookGroupFromFile(String groupName, int number, BufferedReader bufferedReader) throws IOException {
         ArrayList<Passenger> passengerArrayList = new ArrayList<>();
         for (int i = 0; i < number; i++) {
@@ -475,7 +575,13 @@ public class BookingService {
         groupMap.put(groupName, passengerArrayList);
     }
 
-
+    /**
+     * Seat Index
+     * @param ch
+     * - Alphabetical arrangement of seat
+     * @return
+     * number of the arrangement.
+     */
     private int getSeatIndex(char ch) {
         if (ch == 'A') {
             return 0;
@@ -494,7 +600,13 @@ public class BookingService {
     }
 
 
-
+    /**
+     * Index of the seat
+     * @param seat
+     * - takes seat details as the parameters
+     * @return
+     * - alphabetical number of the seat.
+     */
     private char getSeatIndex(Seat seat) {
         if (seat.getServiceClass().equals(ServiceClass.E)) {
             if (seat.getIndex() == 0) {

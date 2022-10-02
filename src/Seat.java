@@ -5,6 +5,18 @@ public class Seat {
     SeatStatus seatStatus;
     Passenger passenger;
     ServiceClass serviceClass;
+
+    /**
+     * Seat detailing
+     * @param row
+     * row of the seat.
+     * @param index
+     * index count of the seat.
+     * @param seatStatus
+     * Whether it is free or allotted.
+     * @param serviceClass
+     * service of the class whether it is economy or first
+     */
     public Seat(int row, int index, SeatStatus seatStatus, ServiceClass serviceClass){
         this.row = row;
         this.index = index;

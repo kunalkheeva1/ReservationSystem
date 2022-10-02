@@ -12,6 +12,7 @@ public class ReservationSystem {
         System.out.println("input file name is: " + args[0]);
 
         if(args[0] != null && (new File(args[0]).exists())){
+
             bookingService.readFromFile(args[0]);
         }
 
@@ -94,4 +95,5 @@ public class ReservationSystem {
         System.out.println("Booking are written to file: " + args[0]);
         System.out.println("Reservation System Ended.........");
     }
+
 }
