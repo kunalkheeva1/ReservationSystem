@@ -476,6 +476,23 @@ public class BookingService {
     }
 
 
+    private int getSeatIndex(char ch) {
+        if (ch == 'A') {
+            return 0;
+        } else if (ch == 'B') {
+            return 1;
+        } else if (ch == 'C') {
+            return 2;
+        } else if (ch == 'D') {
+            return 3;
+        } else if (ch == 'E') {
+            return 4;
+        } else if (ch == 'F') {
+            return 5;
+        }
+        return -1;
+    }
+
 
 
 
