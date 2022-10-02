@@ -352,4 +352,17 @@ public class BookingService {
         }
     }
 
+    private void printSeat(int row, ArrayList<Character> seats) {
+        System.out.printf(String.valueOf(row) + ": ");
+        for (int i = 0; i < seats.size(); i++) {
+            if (i < seats.size() - 1) {
+                System.out.printf(seats.get(i) + ", ");
+            } else {
+                System.out.printf(seats.get(i) + "");
+            }
+        }
+        System.out.println();
+    }
+
+
 }
