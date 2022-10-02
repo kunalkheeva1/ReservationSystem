@@ -432,6 +432,25 @@ public class BookingService {
         }
     }
 
+    private void bookSingleFromFile(String line) {
+        String [] singleBookingLine = line.split(",");
+        String []pasName = singleBookingLine[1].trim().split(" ");
+        Passenger passenger = new Passenger(pasName[0].trim(), pasName[1].trim());
+        ServiceClass seatClass = ServiceClass.valueOf(singleBookingLine[2].trim());
+        int row = Integer.parseInt(singleBookingLine[3].trim()) -1;
+        int seatIndex = getSeatIndex(singleBookingLine[4].trim().charAt(0));
+        Seat seat = new Seat(row, seatIndex, SeatStatus.ALLOCATED, seatClass);
+        seat.setPassenger(passenger);
+        if (seat.getServiceClass().equals(ServiceClass.F)) {
+            flightDetails.getFirstClass()[seatIndex][row] = seat;
+            passengerMap.put(passenger.getFirstName()+passenger.getLastName(), seat);
+        } else {
+            flightDetails.getEconomyClass()[seatIndex][row] = seat;
+            passengerMap.put(passenger.getFirstName()+passenger.getLastName(), seat);
+        }
+    }
+
+
 
 
 }
