@@ -451,6 +451,32 @@ public class BookingService {
     }
 
 
+    private void bookGroupFromFile(String groupName, int number, BufferedReader bufferedReader) throws IOException {
+        ArrayList<Passenger> passengerArrayList = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            String line = bufferedReader.readLine();
+            String []singleLine = line.split(",");
+            String []pname = singleLine[0].split(" ");
+            Passenger passenger = new Passenger(pname[0].trim(), pname[1].trim());
+            ServiceClass seatClass = ServiceClass.valueOf(singleLine[1].trim());
+            int row = Integer.parseInt(singleLine[2].trim()) -1;
+            int seatIndex = getSeatIndex(singleLine[3].trim().charAt(0));
+            Seat seat = new Seat(row, seatIndex, SeatStatus.ALLOCATED, seatClass);
+            seat.setPassenger(passenger);
+            if (seat.getServiceClass().equals(ServiceClass.F)) {
+                flightDetails.getFirstClass()[seatIndex][row] = seat;
+                passengerMap.put(passenger.getFirstName()+passenger.getLastName(), seat);
+            } else {
+                flightDetails.getEconomyClass()[seatIndex][row] = seat;
+                passengerMap.put(passenger.getFirstName()+passenger.getLastName(), seat);
+            }
+            passengerArrayList.add(passenger);
+        }
+        groupMap.put(groupName, passengerArrayList);
+    }
+
+
+
 
 
 }
