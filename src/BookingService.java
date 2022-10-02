@@ -75,4 +75,50 @@ public class BookingService {
     }
 
 
+
+    private boolean bookSingleEconomyClass(ReservationRequest reservationRequest) {
+        int eSeatIndex = -1;
+        int i = 0;
+        if (passengerMap.containsKey(reservationRequest.getPassengers().get(0).getFirstName() + reservationRequest.getPassengers().get(0).getLastName())) {
+            Seat seat = passengerMap.get(reservationRequest.getPassengers().get(0).getFirstName() + reservationRequest.getPassengers().get(0).getLastName());
+            System.out.println("Passenger is booking present already ..." + seat.toString());
+        }
+        for (i = 0; i < flightDetails.getEconomyRows(); i ++) {
+            if (reservationRequest.getSeatPreference().equals(SeatPreference.W)) {
+                if (flightDetails.getEconomyClass()[0][i] == null) {
+                    eSeatIndex = 0;
+                } else if (flightDetails.getEconomyClass()[5][i] == null) {
+                    eSeatIndex = 5;
+                }
+            } else if (reservationRequest.getSeatPreference().equals(SeatPreference.A)) {
+                if (flightDetails.getEconomyClass()[2][i] == null) {
+                    eSeatIndex = 2;
+                } else if (flightDetails.getEconomyClass()[3][i] == null) {
+                    eSeatIndex = 3;
+                }
+            } else {
+                if (flightDetails.getEconomyClass()[1][i] == null) {
+                    eSeatIndex = 1;
+                } else if (flightDetails.getEconomyClass()[4][i] == null) {
+                    eSeatIndex = 4;
+                }
+            }
+            if (eSeatIndex != -1) {
+                break;
+            }
+        }
+        if (eSeatIndex != -1) {
+            Seat seat = new Seat(i, eSeatIndex, SeatStatus.ALLOCATED, ServiceClass.E);
+            seat.setPassenger(reservationRequest.getPassengers().get(0));
+            flightDetails.getEconomyClass()[eSeatIndex][i] = seat;
+            passengerMap.put(reservationRequest.getPassengers().get(0).getFirstName() + reservationRequest.getPassengers().get(0).getLastName(), seat);
+            System.out.println(i+1 +""+ getSeatIndex(seat) +": "+ reservationRequest.getPassengers().get(0).getFirstName() +" "+ reservationRequest.getPassengers().get(0).getLastName());
+        } else {
+            System.out.println("Preferred seat is not available for booking");
+            return false;
+        }
+        return true;
+    }
+
+
 }
