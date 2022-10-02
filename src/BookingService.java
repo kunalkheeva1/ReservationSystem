@@ -320,4 +320,36 @@ public class BookingService {
         }
     }
 
+
+    public void seatManifest(SeatClass seatClass) {
+        if (seatClass.equals(SeatClass.F)) {
+            // availability for first class
+            System.out.println("=====================================");
+            System.out.println("First Class Availability :");
+            System.out.println("=====================================");
+            for (int i = 0; i < 4; i ++) {
+                for (int j = 0; j < flightDetails.getFirstRows(); j++) {
+                    if (flightDetails.getFirstClass()[i][j] != null) {
+                        Seat seat = flightDetails.getFirstClass()[i][j];
+                        System.out.println(j+1 + " "+ getSeatIndex(seat) + " : " + seat.getPassenger().getFirstName() +" "+ seat.getPassenger().getLastName());
+                    }
+                }
+            }
+        } else {
+            // availability for economy class
+            System.out.println();
+            System.out.println("=====================================");
+            System.out.println("Economy Class Availability :");
+            System.out.println("=====================================");
+            for (int i = 0; i < 6; i ++) {
+                for (int j = 0; j < flightDetails.getEconomyRows(); j++) {
+                    if (flightDetails.getEconomyClass()[i][j] != null) {
+                        Seat seat = flightDetails.getEconomyClass()[i][j];
+                        System.out.println(j+1 + ""+ getSeatIndex(seat) + " : " + seat.getPassenger().getFirstName() +" "+ seat.getPassenger().getLastName());
+                    }
+                }
+            }
+        }
+    }
+
 }
