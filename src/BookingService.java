@@ -413,4 +413,25 @@ public class BookingService {
     }
 
 
+    public void readFromFile(String fileName) {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                if(line.charAt(0) == 'G') { // group booking
+                    String []groupHeaderLine = line.split(",");
+                    bookGroupFromFile(groupHeaderLine[1].trim(), Integer.parseInt(groupHeaderLine[2].trim()), bufferedReader);
+                } else {
+                    bookSingleFromFile(line);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 }
