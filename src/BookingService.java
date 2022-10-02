@@ -266,4 +266,58 @@ public class BookingService {
         return true;
     }
 
+
+    public void checkAvailability(ServiceClass seatClass) {
+        if (seatClass.equals(ServiceClass.F)) {
+            // availability for first class
+            System.out.println("=====================================");
+            System.out.println("First Class Availability :");
+            System.out.println("=====================================");
+            for (int i = 0; i < flightDetails.getFirstRows(); i++) {
+                ArrayList<Character> seatList = new ArrayList<>();
+                if (flightDetails.getFirstClass()[0][i] == null) {
+                    seatList.add('A');
+                }
+                if (flightDetails.getFirstClass()[1][i] == null) {
+                    seatList.add('B');
+                }
+                if (flightDetails.getFirstClass()[2][i] == null) {
+                    seatList.add('C');
+                }
+                if (flightDetails.getFirstClass()[3][i] == null) {
+                    seatList.add('D');
+                }
+                printSeat(i + 1, seatList);
+            }
+        } else {
+            // availability for economy class
+            System.out.println();
+            System.out.println("=====================================");
+            System.out.println("Economy Class Availability :");
+            System.out.println("=====================================");
+            for (int i = 0; i < flightDetails.getEconomyRows(); i++) {
+                ArrayList<Character> seatList = new ArrayList<>();
+                if (flightDetails.getEconomyClass()[0][i] == null) {
+                    seatList.add('A');
+                }
+                if (flightDetails.getEconomyClass()[1][i] == null) {
+                    seatList.add('B');
+                }
+                if (flightDetails.getEconomyClass()[2][i] == null) {
+                    seatList.add('C');
+                }
+                if (flightDetails.getEconomyClass()[3][i] == null) {
+                    seatList.add('D');
+                }
+                if (flightDetails.getEconomyClass()[4][i] == null) {
+                    seatList.add('E');
+                }
+                if (flightDetails.getEconomyClass()[5][i] == null) {
+                    seatList.add('F');
+                }
+                printSeat(i + 1, seatList);
+            }
+        }
+    }
+
 }
